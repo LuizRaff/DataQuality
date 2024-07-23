@@ -32,5 +32,15 @@ r = requests.post(apiUrl,data=data)
 print('HTTP Status: ' + str(r.status_code))
 db2 = pd.DataFrame(r.json())
 
-print(db1)
-print(db2)
+#branching logic array
+branchingLogic = []
+
+for row in db1['branching_logic']:
+    if row != '':
+        idx1 = row.index('[') + 1
+        idx2 = row.index(']')
+
+        idx3 = row.index("'") + 1
+        idx4 = -1
+        branchingLogic.append([row[idx1 : idx2], row[idx3: idx4]])
+
