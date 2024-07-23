@@ -1,6 +1,9 @@
 import pandas as pd
 import requests
 
+def inLogic(row):
+    print('oi')
+
 token = 'CC585E1F8B3EC9212A45B258CFFD5E9E'
 apiUrl = 'https://ncov.medsci.ox.ac.uk/api/'
 
@@ -47,6 +50,13 @@ for i in range(db1.shape[0]):
         idx4 = -1
         logic_number = db1['branching_logic'][i][idx3:idx4]
 
-        branchingLogic.append([i, field_name, logic_field, logic_number])
+        branchingLogic.append([field_name, logic_field, logic_number])
 
-print(branchingLogic)
+count = 0
+for i in range(db2.shape[0]):
+    for logic in branchingLogic:
+        if db2[logic[0]][i] == logic[2]:
+            if db2[logic[1]] != '':
+                count += 1
+        
+print((db1.shape[0]-count) / db1.shape[0])
