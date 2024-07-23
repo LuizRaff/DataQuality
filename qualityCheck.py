@@ -59,4 +59,4 @@ for i in range(db2.shape[0]):
             if db2[logic[1]] != '':
                 count += 1
         
-print((db1.shape[0]-count) / db1.shape[0])
+print('Data Quality:', ((db1.shape[0]-count) / db1.shape[0]) * 100,'%')
