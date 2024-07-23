@@ -34,13 +34,19 @@ db2 = pd.DataFrame(r.json())
 
 #branching logic array
 branchingLogic = []
+for i in range(db1.shape[0]):
+    if db1['branching_logic'][i] != '':
+        field_name = db1['field_name'][i]
 
-for row in db1['branching_logic']:
-    if row != '':
-        idx1 = row.index('[') + 1
-        idx2 = row.index(']')
+        idx1 = db1['branching_logic'][i].index('[') + 1
+        idx2 = db1['branching_logic'][i].index(']')
 
-        idx3 = row.index("'") + 1
+        logic_field = db1['branching_logic'][i][idx1:idx2]
+
+        idx3 = db1['branching_logic'][i].index("'") + 1
         idx4 = -1
-        branchingLogic.append([row[idx1 : idx2], row[idx3: idx4]])
+        logic_number = db1['branching_logic'][i][idx3:idx4]
 
+        branchingLogic.append([i, field_name, logic_field, logic_number])
+
+print(branchingLogic)
